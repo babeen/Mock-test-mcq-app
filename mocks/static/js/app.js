@@ -8,7 +8,7 @@ submitAns.addEventListener('click', () => {
 
         if (getInputs[l].checked === true) {
             let ans = getInputs[l].dataset.rightAns;
-
+            console.log(ans)
             if (ans === 'true') {
                 score = score + 1;
             }
@@ -69,7 +69,7 @@ fetch('http://127.0.0.1:8000/mcq-questions/', {
 
                     makeEle.setAttributeNode(rName);
 
-                    makeEle.dataset.rightAns = getAllAns[j].fields.right_ans;
+                    makeEle.dataset.rightAns = getAllAns[j].pk;
 
 
                     let anotherEle = document.createElement("label");
