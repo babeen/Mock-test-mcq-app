@@ -1,10 +1,27 @@
 const myQuestion = document.getElementById('my-que');
-console.log(myQuestion);
+const submitAns = document.getElementById('submit-answer');
+let score = 0;
 
-alert(myQuestion);
+submitAns.addEventListener('click', () => {
+    score = 0;
+    for (let l = 0; l < getInputs.length; l++) {
+
+        if (getInputs[l].checked === true) {
+            let ans = getInputs[l].dataset.rightAns;
+            console.log(ans)
+            if (ans === 'true') {
+                score = score + 1;
+            }
+        }
+
+    }
+    alert(score);
+})
 
 
 let getAllAns;
+let getInputs;
+console.log(getInputs);
 
 fetch('http://127.0.0.1:8000/mcq-answers/', {
     method: 'GET'
@@ -37,7 +54,7 @@ fetch('http://127.0.0.1:8000/mcq-questions/', {
                 //checking with primary key
                 if (ansPk === mcqQuePk) {
                     let getAns = getAllAns[j].fields.answer_haru;
-                    console.log(getAns);
+                    console.log(getAllAns[j]);
 
 
                     let makeEle = document.createElement("input");
@@ -52,6 +69,9 @@ fetch('http://127.0.0.1:8000/mcq-questions/', {
                     console.log(rName.value);
                     makeEle.setAttributeNode(rName);
 
+                    makeEle.dataset.rightAns = getAllAns[j].fields.right_ans;
+
+
                     let anotherEle = document.createElement("label");
                     anotherEle.innerText = getAns;
                     myQuestion.appendChild(anotherEle);
@@ -59,14 +79,16 @@ fetch('http://127.0.0.1:8000/mcq-questions/', {
                     let letsBreak = document.createElement("br");
                     myQuestion.appendChild(letsBreak);
                     console.log(makeEle);
-                    if (getAllAns[i].fields.belongs_to = true) {
-                        console.log('The correct answer is: ', getAllAns[i].fields.answer_haru);
-                    }
+                    getInputs = makeEle;
                 }
-
-
             }
-
+            getInputs = document.querySelectorAll('input');
+            console.log(getInputs);
         }
     })
 })
+
+
+
+
+
