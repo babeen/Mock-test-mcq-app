@@ -8,14 +8,21 @@ submitAns.addEventListener('click', () => {
 
         if (getInputs[l].checked === true) {
             let ans = getInputs[l].dataset.rightAns;
-            console.log(ans)
+
+            for (let arr = 0; arr < getAllAns.length; arr++) {
+                let pkAns = getAllAns[arr].pk;
+                let boolAns = getAllAns[arr].fields.right_ans;
+                console.log(pkAns);
+
+
+            }
             if (ans === 'true') {
                 score = score + 1;
             }
         }
 
     }
-    alert(score);
+    console.log(score);
 })
 
 
