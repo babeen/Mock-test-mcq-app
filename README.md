@@ -7,4 +7,10 @@
 ## Step 4: To run the repository in your IDE. You need to do clone.
 ` git clone '<url>' `
 ## step 5 : To run server 
-` python manage.py runserver` //locally run//
+`
+""" 
+locally run
+"""
+python manage.py runserver
+
+` 
