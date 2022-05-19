@@ -12,17 +12,17 @@ submitAns.addEventListener('click', () => {
             for (let arr = 0; arr < getAllAns.length; arr++) {
                 let pkAns = getAllAns[arr].pk;
                 let boolAns = getAllAns[arr].fields.right_ans;
-                console.log(pkAns);
-
-
-            }
-            if (ans === 'true') {
-                score = score + 1;
+                console.log(typeof (pkAns));
+                console.log(typeof (boolAns));
+                console.log(typeof (ans));
+                if (pkAns == ans && boolAns === true) {
+                    score = score + 1;
+                }
             }
         }
 
     }
-    console.log(score);
+    alert(score);
 })
 
 
@@ -36,6 +36,7 @@ fetch('http://127.0.0.1:8000/mcq-answers/', {
     ansResp.json().then(ansResp => {
 
         getAllAns = ansResp;
+        console.log(ansResp);
     })
 })
 
@@ -43,7 +44,7 @@ fetch('http://127.0.0.1:8000/mcq-questions/', {
     method: 'GET'
 }).then(queResp => {
     queResp.json().then(queResp => {
-
+        console.log(queResp);
         for (let i = 0; i < queResp.length; i++) {
 
 

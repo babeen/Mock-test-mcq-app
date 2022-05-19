@@ -13,7 +13,6 @@ def my_questions(request):
     # return HttpResponse('Hello Question')
     all_questions = MaEutaQuestionHo.objects.all()
     # return HttpResponse(questions)
-
     q_Json = serializers.serialize('json', all_questions)
     # return JsonResponse(myJson)
     return HttpResponse(q_Json, 'application/json')
