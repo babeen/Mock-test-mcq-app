@@ -1,9 +1,10 @@
 const myQuestion = document.getElementById('my-que');
 const submitAns = document.getElementById('submit-answer');
+const scoreDisplay = document.getElementsByClassName('score-display');
 
 
 submitAns.addEventListener('click', () => {
-    score = 0;
+    let score = 0;
     for (let l = 0; l < getInputs.length; l++) {
 
         if (getInputs[l].checked === true) {
@@ -22,7 +23,10 @@ submitAns.addEventListener('click', () => {
         }
 
     }
-    alert(score);
+
+    scoreDisplay[0].innerHTML = score;
+
+
 })
 
 
