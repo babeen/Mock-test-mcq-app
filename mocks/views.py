@@ -6,6 +6,10 @@ from django.core import serializers
 
 
 def hello(request):
+    return render(request, 'home.html')
+
+
+def home(request):
     return render(request, 'index.html')
 
 
