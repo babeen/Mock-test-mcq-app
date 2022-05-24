@@ -57,6 +57,12 @@ def signout(request):
     pass
 
 
+def submitscore(request, score):
+    print(score)
+    print(request.user.email)
+    return HttpResponse("You're score is %s." % score)
+
+
 def my_questions(request):
     # return HttpResponse('Hello Question')
     all_questions = MaEutaQuestionHo.objects.all()

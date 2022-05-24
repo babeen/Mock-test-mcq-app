@@ -26,7 +26,11 @@ submitAns.addEventListener('click', () => {
 
     scoreDisplay[0].innerHTML = score;
 
-
+    fetch('/submitscore/' + score, {
+        method: 'GET'
+    }).then(myscore => {
+        console.log(myscore);
+    })
 })
 
 
@@ -34,7 +38,7 @@ let getAllAns;
 let getInputs;
 
 
-fetch('http://127.0.0.1:8000/mcq-answers/', {
+fetch('/mcq-answers/', {
     method: 'GET'
 }).then(ansResp => {
     ansResp.json().then(ansResp => {
@@ -44,7 +48,7 @@ fetch('http://127.0.0.1:8000/mcq-answers/', {
     })
 })
 
-fetch('http://127.0.0.1:8000/mcq-questions/', {
+fetch('/mcq-questions/', {
     method: 'GET'
 }).then(queResp => {
     queResp.json().then(queResp => {

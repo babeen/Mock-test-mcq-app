@@ -8,5 +8,6 @@ urlpatterns = [
     path('mcq-answers/', views.my_answers),
     path('signup/', views.signup),
     path('signin/', views.signin),
-    path('signout/', views.signout)
+    path('signout/', views.signout),
+    path('submitscore/<int:score>/', views.submitscore),
 ]
