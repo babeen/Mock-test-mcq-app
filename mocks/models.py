@@ -1,4 +1,4 @@
-from statistics import mode
+
 from django.db import models
 
 # Create your models here.
@@ -18,6 +18,13 @@ class MaAnsewersHo(models.Model):
     right_ans = models.BooleanField()
     belongs_to = models.ForeignKey(
         MaEutaQuestionHo, on_delete=models.CASCADE, default=1)
+
+    def __str__(self):
+        return self.answer_haru
+
+
+class SabKoScore(models.Model):
+    score_haru = models.IntegerField()
 
     def __str__(self):
         return self.answer_haru

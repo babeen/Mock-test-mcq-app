@@ -8,3 +8,9 @@
 ` git clone '<url>' `
 ## step 5 : To run server 
 ` python manage.py runserver ` // locally run
+
+#Creating Models
+1. ` models.py:` Write code with classname, fields and attributes
+2. `admin.py:` Resigter your classname in the file.
+3. Run `python manage.py makemigrations`
+4. Run `python manage.py migrate`
