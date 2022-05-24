@@ -4,6 +4,7 @@ from .models import *
 from django.core import serializers
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.contrib.auth import authenticate, login
 # Create your views here.
 
 
@@ -24,17 +25,31 @@ def signup(request):
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
 
-        myuser = User.objects.create(username, email, pass1)
+        myuser = User.objects.create_user(username, email, pass1)
         myuser.first_name = fname
         myuser.last_name = lname
 
         myuser.save()
         messages.success(request, 'Your account is successfully signed up.')
 
-        return redirect('signin')
+        return redirect('/signin/')
+    return render(request, 'signup.html')
 
 
 def signin(request):
+    if request.method == "POST":
+        username = request.POST["username"]
+        pass1 = request.POST["pass1"]
+
+        user = authenticate(username=username, password=pass1)
+        if user is not None:
+            login(request, user)
+            fname = user.first_name
+            # return render(request, "index.html", {'fname': fname})
+            return redirect('/home/')
+        else:
+            messages.error(request, "Bad Credentials.")
+            return redirect('/')
     return render(request, 'signin.html')
 
 
