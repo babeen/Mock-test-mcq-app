@@ -27,4 +27,4 @@ class SabKoScore(models.Model):
     score_haru = models.IntegerField()
 
     def __str__(self):
-        return self.answer_haru
+        return self.score_haru

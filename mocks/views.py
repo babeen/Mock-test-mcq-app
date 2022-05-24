@@ -5,6 +5,8 @@ from django.core import serializers
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
+from .models import SabKoScore
+
 # Create your views here.
 
 
@@ -60,6 +62,8 @@ def signout(request):
 def submitscore(request, score):
     print(score)
     print(request.user.email)
+    p = SabKoScore.objects.create(score_haru=score)
+    p.save()
     return HttpResponse("You're score is %s." % score)
 
 
