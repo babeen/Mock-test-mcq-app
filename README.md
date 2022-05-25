@@ -14,3 +14,7 @@
 2. `admin.py:` Resigter your classname in the file.
 3. Run `python manage.py makemigrations`
 4. Run `python manage.py migrate`
+
+## method
+`setInterval(function(),1000)`
+* It changes the any DOM value by interval(i.e 1000) until the clearInterval value.

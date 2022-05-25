@@ -50,3 +50,7 @@ button:hover {
     font-weight: bolder;
     color: #fff;
 }
+
+.count-down {
+    border: 3px solid brown;
+}

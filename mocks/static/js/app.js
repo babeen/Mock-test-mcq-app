@@ -1,7 +1,19 @@
 const myQuestion = document.getElementById('my-que');
 const submitAns = document.getElementById('submit-answer');
 const scoreDisplay = document.getElementsByClassName('score-display');
+const timer = document.getElementById('count-down');
+timer.innerHTML = '5'
 
+let countDown = Number(timer.innerHTML);
+// console.log(countDown);
+let number = countDown;
+let stop = setInterval(function () {
+    number -= 1;
+    timer.innerHTML = number;
+    if (number === 0) {
+        clearInterval(stop);
+    }
+}, 1000)
 
 submitAns.addEventListener('click', () => {
     let score = 0;
