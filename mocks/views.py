@@ -4,7 +4,7 @@ from .models import *
 from django.core import serializers
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from .models import SabKoScore
 
 # Create your views here.
@@ -56,15 +56,25 @@ def signin(request):
 
 
 def signout(request):
-    pass
+    logout(request)
+    messages.success(request, "Logged out Successfully!")
+    return redirect('/')
 
 
 def submitscore(request, score):
     print(score)
-    print(request.user.email)
-    p = SabKoScore.objects.create(score_haru=score)
+    print(request.user.id)
+    p = SabKoScore.objects.create(score_haru=score, user_id=request.user.id)
     p.save()
     return HttpResponse("You're score is %s." % score)
+
+
+def showall(request):
+
+    p = SabKoScore.objects.filter(user_id=request.user.id)
+    q_Json = serializers.serialize('json', p)
+    # return JsonResponse(myJson)
+    return HttpResponse(q_Json, 'application/json')
 
 
 def my_questions(request):
