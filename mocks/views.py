@@ -1,7 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import *
 from django.core import serializers
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from .models import SabKoScore
+
 # Create your views here.
 
 
@@ -11,6 +16,65 @@ def hello(request):
 
 def home(request):
     return render(request, 'index.html')
+
+
+def signup(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        fname = request.POST['fname']
+        lname = request.POST['lname']
+        email = request.POST['email']
+        pass1 = request.POST['pass1']
+        pass2 = request.POST['pass2']
+
+        myuser = User.objects.create_user(username, email, pass1)
+        myuser.first_name = fname
+        myuser.last_name = lname
+
+        myuser.save()
+        messages.success(request, 'Your account is successfully signed up.')
+
+        return redirect('/signin/')
+    return render(request, 'signup.html')
+
+
+def signin(request):
+    if request.method == "POST":
+        username = request.POST["username"]
+        pass1 = request.POST["pass1"]
+
+        user = authenticate(username=username, password=pass1)
+        if user is not None:
+            login(request, user)
+            fname = user.first_name
+            # return render(request, "index.html", {'fname': fname})
+            return redirect('/home/')
+        else:
+            messages.error(request, "Bad Credentials.")
+            return redirect('/')
+    return render(request, 'signin.html')
+
+
+def signout(request):
+    logout(request)
+    messages.success(request, "Logged out Successfully!")
+    return redirect('/')
+
+
+def submitscore(request, score):
+    print(score)
+    print(request.user.id)
+    p = SabKoScore.objects.create(score_haru=score, user_id=request.user.id)
+    p.save()
+    return HttpResponse("You're score is %s." % score)
+
+
+def showall(request):
+
+    p = SabKoScore.objects.filter(user_id=request.user.id)
+    q_Json = serializers.serialize('json', p)
+    # return JsonResponse(myJson)
+    return HttpResponse(q_Json, 'application/json')
 
 
 def my_questions(request):

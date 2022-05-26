@@ -5,5 +5,10 @@ urlpatterns = [
     path('', views.hello),
     path('home/', views.home),
     path('mcq-questions/', views.my_questions),
-    path('mcq-answers/', views.my_answers)
+    path('mcq-answers/', views.my_answers),
+    path('signup/', views.signup),
+    path('signin/', views.signin),
+    path('showall/', views.showall),
+    path('home/signout/', views.signout),
+    path('submitscore/<int:score>/', views.submitscore),
 ]

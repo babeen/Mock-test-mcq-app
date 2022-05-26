@@ -3,3 +3,4 @@ from .models import *
 # Register your models here.
 admin.site.register(MaEutaQuestionHo)
 admin.site.register(MaAnsewersHo)
+admin.site.register(SabKoScore)

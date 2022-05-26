@@ -1,7 +1,22 @@
 const myQuestion = document.getElementById('my-que');
 const submitAns = document.getElementById('submit-answer');
 const scoreDisplay = document.getElementsByClassName('score-display');
+const timer = document.getElementById('count-down');
+timer.innerHTML = '10'
 
+let countDown = Number(timer.innerHTML);
+// console.log(countDown);
+let number = countDown;
+let stop = setInterval(function () {
+    number -= 1;
+    timer.innerHTML = number;
+    if (number === 0) {
+        window.location.href = '/';
+        clearInterval(stop);
+
+
+    }
+}, 1000)
 
 submitAns.addEventListener('click', () => {
     let score = 0;
@@ -26,7 +41,11 @@ submitAns.addEventListener('click', () => {
 
     scoreDisplay[0].innerHTML = score;
 
-
+    fetch('/submitscore/' + score, {
+        method: 'GET'
+    }).then(myscore => {
+        console.log(myscore);
+    })
 })
 
 
@@ -34,7 +53,7 @@ let getAllAns;
 let getInputs;
 
 
-fetch('http://127.0.0.1:8000/mcq-answers/', {
+fetch('/mcq-answers/', {
     method: 'GET'
 }).then(ansResp => {
     ansResp.json().then(ansResp => {
@@ -44,7 +63,7 @@ fetch('http://127.0.0.1:8000/mcq-answers/', {
     })
 })
 
-fetch('http://127.0.0.1:8000/mcq-questions/', {
+fetch('/mcq-questions/', {
     method: 'GET'
 }).then(queResp => {
     queResp.json().then(queResp => {
