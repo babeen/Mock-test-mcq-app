@@ -2,7 +2,7 @@ const myQuestion = document.getElementById('my-que');
 const submitAns = document.getElementById('submit-answer');
 const scoreDisplay = document.getElementsByClassName('score-display');
 const timer = document.getElementById('count-down');
-timer.innerHTML = '5'
+timer.innerHTML = '10'
 
 let countDown = Number(timer.innerHTML);
 // console.log(countDown);
@@ -11,7 +11,10 @@ let stop = setInterval(function () {
     number -= 1;
     timer.innerHTML = number;
     if (number === 0) {
+        window.location.href = '/';
         clearInterval(stop);
+
+
     }
 }, 1000)
 
