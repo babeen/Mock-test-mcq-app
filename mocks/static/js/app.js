@@ -10,10 +10,11 @@ let number = countDown;
 let stop = setInterval(function () {
     number -= 1;
     timer.innerHTML = number;
+    
     if (number === 0) {
         window.location.href = '/';
         clearInterval(stop);
-
+        // put autoComplete code here
 
     }
 }, 1000)
