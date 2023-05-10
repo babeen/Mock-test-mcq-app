@@ -66,7 +66,8 @@ def submitscore(request, score):
     print(request.user.id)
     p = SabKoScore.objects.create(score_haru=score, user_id=request.user.id)
     p.save()
-    return HttpResponse("You're score is %s." % score)
+    # return HttpResponse("You're score is %s." % score)
+    return render(request,'score.html')
 
 
 def showall(request):
